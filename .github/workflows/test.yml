@@ -108,5 +108,5 @@ jobs:
           --show-leak-kinds=all \
           --track-origins=yes \
           --verbose \
-          yarn test:unit
+          lerna run test:unit --concurrency 1
 
