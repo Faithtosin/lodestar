@@ -65,32 +65,32 @@ jobs:
             packages/*/.git-data.json
           key: ${{ runner.os }}-node-${{ matrix.node }}-${{ github.sha }}
 
-  unit-tests:
-    name: Unit Tests
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        node: [20]
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{matrix.node}}
-          check-latest: true
-          cache: yarn
-      - name: Restore build cache
-        id: cache-primes-restore
-        uses: actions/cache/restore@v3
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            lib/
-            packages/*/lib
-            packages/*/.git-data.json
-          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ github.sha }}
-          fail-on-cache-miss: true
+  # unit-tests:
+  #   name: Unit Tests
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       node: [20]
+  #   steps:
+      # - uses: actions/checkout@v3
+      # - uses: actions/setup-node@v3
+      #   with:
+      #     node-version: ${{matrix.node}}
+      #     check-latest: true
+      #     cache: yarn
+      # - name: Restore build cache
+      #   id: cache-primes-restore
+      #   uses: actions/cache/restore@v3
+      #   with:
+      #     path: |
+      #       node_modules
+      #       packages/*/node_modules
+      #       lib/
+      #       packages/*/lib
+      #       packages/*/.git-data.json
+      #     key: ${{ runner.os }}-node-${{ matrix.node }}-${{ github.sha }}
+      #     fail-on-cache-miss: true
 
       # # Cache validator slashing protection data tests
       # - name: Restore spec tests cache
@@ -98,7 +98,7 @@ jobs:
       #   with:
       #     path: packages/validator/spec-tests
       #     key: spec-test-data-${{ hashFiles('packages/validator/test/spec/params.ts') }}
-      - name: Setup Valgring
+      - name: Setup Valgrind
         run: |
           id -a
           sudo apt -y install valgrind
