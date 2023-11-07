@@ -79,18 +79,18 @@ jobs:
           node-version: ${{matrix.node}}
           check-latest: true
           cache: yarn
-      # - name: Restore build cache
-      #   id: cache-primes-restore
-      #   uses: actions/cache/restore@v3
-      #   with:
-      #     path: |
-      #       node_modules
-      #       packages/*/node_modules
-      #       lib/
-      #       packages/*/lib
-      #       packages/*/.git-data.json
-      #     key: ${{ runner.os }}-node-${{ matrix.node }}-${{ github.sha }}
-      #     fail-on-cache-miss: true
+      - name: Restore build cache
+        id: cache-primes-restore
+        uses: actions/cache/restore@v3
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            lib/
+            packages/*/lib
+            packages/*/.git-data.json
+          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ github.sha }}
+          fail-on-cache-miss: true
 
       # # Cache validator slashing protection data tests
       # - name: Restore spec tests cache
